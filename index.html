@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Eventbroadcast by guidone</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Eventbroadcast</h1>
+        <p>An extension to the trigger method of JQuery</p>
+        <p class="view"><a href="https://github.com/guidone/EventBroadcast">View the Project on GitHub <small>guidone/EventBroadcast</small></a></p>
+        <ul>
+          <li><a href="https://github.com/guidone/EventBroadcast/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/guidone/EventBroadcast/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/guidone/EventBroadcast">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p><strong>Eventbroadcast</strong> it's a small plugin to improve the functionality of <strong>bind()</strong>/<strong>trigger()</strong>: the method <em>$.trigger()</em> (without a selector) triggers the event <em>&lt;event_name&gt;</em> on all elements previously registered to the event through <em>.bind()</em> and <em>.one()</em>.</p>
+
+<p>The main problem with the classic jQuery
+<em>$().trigger()</em> method is that must be used on the element that receives the events, leaving the <a href="http://en.wikipedia.org/wiki/Publish%20subscribe_pattern">Publish/Subscribe pattern</a> uncomplete: we need to programmatically know the elements to cast the event to.</p>
+
+<p>With the <strong>Publish/Subscribe pattern</strong> it's easy to decouple the code in charge to create the event from the code that receives it: the event emitter doesn't know (and doesn't care), at runtime, who is listening to the event (speaking with the words of academics, it's not aware of the topology of the elements).
+ <strong>The more the code is decoupled, the more is maintanable.</strong></p>
+
+<h2>An example in the real world</h2>
+
+<p>Suppose you have a login/logout dialogs in Javascript and several HTML fragments that must be updated based on session changes, for example:</p>
+
+<ul>
+<li>when the user logs in, we need to update the username box with name of the user and hide the "Login button"</li>
+<li>when the user logs out, we need to update the username box with "anonymous" and show the "Login button"</li>
+</ul><p>Below is the pseudo-code for this:</p>
+
+<pre><code>function doLogin() { 
+    $.ajax('/user/login', {
+        username: 'my_username', 
+        password: 'my_password'
+        }, 
+        function (result) { 
+            if (!result.error)  
+                $.trigger('login',result.username); 
+            } 
+        ); 
+    }
+function doLogout() { 
+    $.getJSON('/user/logout',
+        function(result) { 
+            if (!result.error) { 
+                $.trigger('logout'); 
+                } 
+            } 
+    } // [...]
+$('a.btnLogin')
+    .bind('login',function(evt) { 
+        // hide the login button
+        $(this).hide();
+        }) 
+    .bind('logout',function(evt) { 
+        // hide the login button
+        $(this).show(); 
+        }); // [...]
+$('div.username')
+    .bind('login',function(evt,username) { 
+        // update the username box
+        $(this).html(username);
+        })
+    .bind('logout',function(evt,username) { 
+        // update the username box
+        $(this).html('Anonymous'); 
+        });
+</code></pre>
+
+<p>Here we have two events,<strong>login</strong> and <strong>logout</strong>, triggered at the end of <em>doLogin()</em> and <em>doLogout()</em> operations. In this way the login/logout ajax operations are completely decoupled from the view: doLogin() and doLogout() don't have to know where to put datas (for example the jQuery CSS selectors of the elements), they just fire events!
+If the layout changes and box/buttons move around the page, everything will still work.</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/guidone">guidone</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    
+  </body>
+</html>
