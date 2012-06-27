@@ -1,4 +1,4 @@
-Eventbroadcast it's a small plugin to improve the functionality of **bind()**/**trigger()**: the method *$.trigger(<event_name>)* (without a selector) triggers the event *\<event\_name\>* on all elements previously registered to the event through *.bind()* and *.one()*.
+**Eventbroadcast** it's a small plugin to improve the functionality of **bind()**/**trigger()**: the method *$.trigger(<event_name>)* (without a selector) triggers the event *\<event\_name\>* on all elements previously registered to the event through *.bind()* and *.one()*.
 
 The main problem with the classic jQuery
 *$(<css-selector>).trigger()* method is that must be used on the element that receives the events, leaving the [Publish/Subscribe pattern](http://en.wikipedia.org/wiki/Publish subscribe_pattern) uncomplete: we need to programmatically know the elements to cast the event to.
