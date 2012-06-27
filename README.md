@@ -3,7 +3,7 @@ Eventbroadcast it's a small plugin to improve the functionality of **bind()**/**
 The main problem with the classic jQuery
 *$(<css-selector>).trigger()* method is that must be used on the element that receives the events, leaving the [Publish/Subscribe pattern](http://en.wikipedia.org/wiki/Publish subscribe_pattern) uncomplete: we need to programmatically know the elements to cast the event to.
 
-With the **Publish/Subscribe pattern** it's easy to decouple the code in charge to create the event from the code that receives it: the event emitter doesn't know (and doesn't care), at runtime, who is listening to the event (speaking with the words of academics, it's not aware of the topology of the elements).\
+With the **Publish/Subscribe pattern** it's easy to decouple the code in charge to create the event from the code that receives it: the event emitter doesn't know (and doesn't care), at runtime, who is listening to the event (speaking with the words of academics, it's not aware of the topology of the elements).
  **The more the code is decoupled, the more is maintanable.**
 
 ##An example in the real world
@@ -30,7 +30,7 @@ Below is the pseudo-code for this:
 		$.getJSON('/user/logout',
 			function(result) { 
 				if (!result.error) { 
-					$.trigger(�logout�); 
+					$.trigger('logout'); 
 					} 
 				} 
 		} // [...]
