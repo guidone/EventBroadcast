@@ -1,16 +1,16 @@
-**Eventbroadcast** it's a small plugin to improve the functionality of **bind()**/**trigger()**: the method *$.trigger(Õ<event_name>Õ)* (without a selector) triggers the event *\<event\_name\>* on all elements previously registered to the event through *.bind()* and *.one()*.
+Eventbroadcast it's a small plugin to improve the functionality of **bind()**/**trigger()**: the method *$.trigger(ï¿½<event_name>ï¿½)* (without a selector) triggers the event *\<event\_name\>* on all elements previously registered to the event through *.bind()* and *.one()*.
 
 The main problem with the classic jQuery
-*\$(Õ<css-selector>Õ).trigger()* method is that must be used on the element that receives the events, leaving the [Publish/Subscribe pattern](http://en.wikipedia.org/wiki/PublishÐsubscribe_pattern) uncomplete: we need to programmatically know the elements to cast the event to.
+*\$(<css-selector>).trigger()* method is that must be used on the element that receives the events, leaving the [Publish/Subscribe pattern](http://en.wikipedia.org/wiki/Publishï¿½subscribe_pattern) uncomplete: we need to programmatically know the elements to cast the event to.
 
-With the **Publish/Subscribe pattern** it's easy to decouple the code in charge to create the event from the code that receives it: the event emitter doesnÕt know (and doesnÕt care), at runtime, who is listening to the event (speaking with the words of academics, itÕs not aware of the topology of the elements).\
+With the **Publish/Subscribe pattern** it's easy to decouple the code in charge to create the event from the code that receives it: the event emitter doesnï¿½t know (and doesnï¿½t care), at runtime, who is listening to the event (speaking with the words of academics, itï¿½s not aware of the topology of the elements).\
  **The more the code is decoupled, the more is maintanable.**
 
 ##An example in the real world
 
 Suppose you have a login/logout dialogs in Javascript and several HTML fragments that must be updated based on session changes, for example:
 
-- when the user logs in, we need to update the username box with name of the user and hide the ÒLogin buttonÓ
+- when the user logs in, we need to update the username box with name of the user and hide the ï¿½Login buttonï¿½
 - when the user logs out, we need to update the username box with "anonymous" and show the "Login button"
 
 Below is the pseudo-code for this:
@@ -30,11 +30,11 @@ Below is the pseudo-code for this:
 		$.getJSON('/user/logout',
 			function(result) { 
 				if (!result.error) { 
-					$.trigger(ÕlogoutÕ); 
+					$.trigger(ï¿½logoutï¿½); 
 					} 
 				} 
-		} // [É]
-	$(Õa.btnLoginÕ)
+		} // [ï¿½]
+	$(ï¿½a.btnLoginï¿½)
 		.bind('login',function(evt) { 
 			// hide the login button
 			$(this).hide();
@@ -42,9 +42,9 @@ Below is the pseudo-code for this:
 		.bind('logout',function(evt) { 
 			// hide the login button
 			$(this).show(); 
-			}); // [É]
-	$(Õdiv.usernameÕ)
-		.bind(ÕloginÕ,function(evt,username) { 
+			}); // [ï¿½]
+	$(ï¿½div.usernameï¿½)
+		.bind(ï¿½loginï¿½,function(evt,username) { 
 			// update the username box
 			$(this).html(username);
 			})
