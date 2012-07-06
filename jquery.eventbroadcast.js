@@ -1,6 +1,6 @@
 /*
 * EventBroadcast - Enable Pub/Sub pattern in jQuery, event broadcasting
-* v. 1.2 
+* v. 1.2.1
 *
 * Created by Guido Bellomo (http://javascript-jedi.com)
 * Licensed under the GPL (http://www.opensource.org/licenses/gpl-license.php).
