@@ -26,6 +26,7 @@
 (function($) {
 
 	var _bind = jQuery.fn.bind;
+	var _on = jQuery.fn.on;
 	var _unbind = jQuery.fn.unbind;
 	var _one = jQuery.fn.one;
 	var listeners = {};	
@@ -126,10 +127,20 @@
 			_bind.apply(this,arguments);
 		
 			return this;
+			},
+		
+		on:function(strEvent,data,callback) {
+			// Register the listener
+			jQuery(this).each(function() {
+				// Register the listener
+				registerListener(strEvent,this);			
+				});
+		
+			_on.apply(this,arguments);
+		
+			return this;
 			}
 		
 		});
-	
-	
 	
 })(jQuery);
